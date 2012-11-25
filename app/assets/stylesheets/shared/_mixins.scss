@@ -1,0 +1,10 @@
+
+@mixin cs-single-pixel-text-shadow ($light: true) {
+  $color: false; $shadow: false;
+  @if $light { $color: white; $shadow: black; } @else { $color: #585858; $shadow: white; }
+  color: $color;
+  @include single-text-shadow($color: $shadow, $hoff: 0, $voff: 1px, $blur: 0);
+}
+
+
+

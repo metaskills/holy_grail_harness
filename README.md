@@ -1,32 +1,28 @@
 
+<img src="https://raw.github.com/metaskills/holy_grail_harness/master/app/assets/images/holy_grail_harness.png" height="204" width="120" style="float:left; margin-right:15px;"/>
+
 # HolyGrailHarness
 
+A bootstrapped Rails application prototype that focuses on simple test patterns for Ruby & JavaScript!
+
+Unlike normal [Rails Application Templates](http://guides.rubyonrails.org/rails_application_templates.html) or more modern Rails application generators like [Rails Composer](http://railsapps.github.com/rails-composer/), the HolyGrailHarness is a basic Rails application that can be considered a prototype and customized via a simple setup script. It is also somewhat opinionated in that it pushes what I believe are the most simple and powerful testing choices. It focus on using Ruby 1.9 or 2.0, MiniTest::Spec, Capybara, Poltergeist, and Konacha. More details on each component and what HolyGrailHarness provides are below.
 
 
-= TODO
+# Usage
 
-* Create a Spine submodule
-* Render an index page!
-  - Use spacepen.
-  - Use bootstrap/font-awesome stuff.
-    http://fortawesome.github.com/Font-Awesome/
+Super simple. Just follow these steps below. Make sure to replace `MyAppName` below with the name of your new Rails application. The setup script has a few options and the end result will be a new Rails application all ready to go.
 
+  1. [Download](https://github.com/metaskills/holy_grail_harness/archive/master.zip) the project.
+  2. Now from the root of "holy_grail_harness" directory.
+    * `$ bundle install`
+    * `$ bundle exec thor setup MyAppName`
 
-= Holy Grail Harness
+**Why not a normal Rails application template?** I am very persnickety about how I like to organize my code and application directories. Although, Rails application templates provide a really nice feature set. It was much easier for me to bootstrap a new Rails application using application prototype method. The end result is a cleaner Gemfile and application setup that can be vetted and tested from within HolyGrailHarness itself.
 
-! Some notes on what the setup script would do:
-
-```
-$ bundle install
-$ bundle exec thor setup MyAppName
-```
-
-! All about TESTING both Ruby & JavaScirpt!
-! Opinionated, but with some configuration options.
-! Ruby 1.9
 
 # Setup Script Notes
 
+* CD up one directory
 * Remove git directory `rm -rf .git`
 * Search for "HolyGrailHarness" and replace with "YourAppName"
 * Search for "holy_grail_harness" and replace with "your_app_name"
@@ -50,6 +46,7 @@ $ bundle exec thor setup MyAppName
         $ git submodule add git://github.com/maccman/spine.git vendor/assets/javascripts/spine
 * Bundle update
 * Remove thor/setup script files. Self implode.
+* Rename directory.
 * Init .git repository.
   - Do post git stuff.
 
@@ -98,6 +95,10 @@ $ bundle exec thor setup MyAppName
   - An PubSub notification system.
 * Dont like X
   - Spine.JS
+
+
+* Font Awesome http://fortawesome.github.com/Font-Awesome/
+* bootstrap
 
 
 # Extras

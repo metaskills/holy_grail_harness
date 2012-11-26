@@ -10,12 +10,12 @@ Unlike normal [Rails Application Templates](http://guides.rubyonrails.org/rails_
 
 # Usage
 
-Super simple. Just follow these steps below. Make sure to replace `MyAppName` below with the name of your new Rails application. The setup script has a few options and the end result will be a new Rails application all ready to go.
+Super simple. Just follow these steps below. Make sure to replace `my_app_name` below with the name of your new Rails application. The setup script has a few options and the end result will be a new Rails application all ready to go.
 
   1. [Download](https://github.com/metaskills/holy_grail_harness/archive/master.zip) the project.
   2. Now from the root of "holy_grail_harness" directory.
     * `$ bundle install`
-    * `$ bundle exec thor setup MyAppName`
+    * `$ bundle exec thor setup my_app_name`
 
 **Why not a normal Rails application template?** I am very persnickety about how I like to organize my code and application directories. Although, Rails application templates provide a really nice feature set. It was much easier for me to bootstrap a new Rails application using application prototype method. The end result is a cleaner Gemfile and application setup that can be vetted and tested from within HolyGrailHarness itself.
 

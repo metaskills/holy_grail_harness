@@ -9,6 +9,7 @@ class Setup < Thor::Group
   desc "Setup your Rails application using the given 'my_app_name'."
 
   def create_new_secret_token
+    say "Creating new secret token..."
     in_root do
       @secret_token = run("#{extify(:rake)} secret", verbose: false, capture: true).strip
       gsub_file 'config/initializers/secret_token.rb', replace_flag, @secret_token, verbose: false

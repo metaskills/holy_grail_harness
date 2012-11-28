@@ -2,9 +2,9 @@
 
 describe 'HolyGrailHarness.Application', ->
   
-  it 'is initialized', ->
-    expect(HolyGrailHarness).to.have.property 'Application'
+  it 'is defined', ->
+    expect(window).to.have.property 'HolyGrailHarness'
 
   it 'renders', ->
-    expect(@body).to.contain 'Holy Grail Harness'
+    expect(@body).to.contain 'HolyGrailHarness'
 

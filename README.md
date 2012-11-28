@@ -17,43 +17,22 @@ Super simple. Just follow these steps below. Make sure to replace `my_app_name` 
     * `$ bundle install`
     * `$ bundle exec thor setup my_app_name`
 
-**Why not a normal Rails application template?** I am very persnickety about how I like to organize my code and application directories. Although, Rails application templates provide a really nice feature set. It was much easier for me to bootstrap a new Rails application using application prototype method. The end result is a cleaner Gemfile and application setup that can be vetted and tested from within HolyGrailHarness itself.
+**Why not a normal Rails application template?** I am very persnickety about how I like to organize my code and application directories. Although, Rails application templates provide a really nice feature set. It was much easier for me to bootstrap a new Rails application using this prototype method. The end result is a cleaner Gemfile and application setup that can be vetted and tested from within HolyGrailHarness itself.
 
 
 # Setup Script Notes
 
-* CD up one directory
-* Remove git directory `rm -rf .git`
-* Search for "HolyGrailHarness" and replace with "YourAppName"
-* Search for "holy_grail_harness" and replace with "your_app_name"
-  - In session store key.
-  - Rename app/assets/javascripts/holy_grail_harness to new.
-* Run `rake secret` and past this value into the `config/initializers/secret_token.rb` file.
-* Remove app/assets/images/holy_grail_harness.* files
 * Things you may want to do manually...
   * Remove root route (root :to => 'application#index')
   * Remove index action (def index ; render text: "", layout: true ; end)
 * Test
   - Intergration - Remove or clear out.
-* Options
-  - Spine (JS MV*) framework
-    * If no 
-      - rm javascritps/holy_grail_harness and promote javascripts/application/index
-      - rm HolyGrailHarness.App.Index.init(); in application.html.erb
-    * If yes
-      - Remove `rm -rf vendor/assets/javascripts/spine`
-      - Save SHA of 457c763d away and pref. Post git init and add. Create a submodule.
-        $ git submodule add git://github.com/maccman/spine.git vendor/assets/javascripts/spine
-* Bundle update
 * Remove thor/setup script files. Self implode.
-* Rename directory.
-* Init .git repository.
-  - Do post git stuff.
+* Rename parent directory.
+* Display some final message
+  - Detect if they have PhantomJS bin in PATH or not.
 
-
-
-
-
+ 
 # Testing
 
 * Latest Rails 3.x and jQuery 1.8
@@ -117,7 +96,7 @@ Super simple. Just follow these steps below. Make sure to replace `my_app_name` 
 
 # Guard
 
-Both [guard-minitest](https://github.com/guard/guard-minitest) and [guard-konacha](https://github.com/alexgb/guard-konacha) are bundled and ready to go. A basic `Guardfile` is already set to go too. Unlike most, this one is split into two groups `:ruby` or `:js`. This lets you focus on either everything or a specific language for your tests.
+Both [guard-minitest](https://github.com/guard/guard-minitest) and [guard-konacha](https://github.com/alexgb/guard-konacha) are bundled and ready to go. A basic `Guardfile` is already setup too. Unlike most, this one is split into two groups `:ruby` or `:js`. This lets you focus on either everything or a specific language for your tests.
 
 ```
 $ guard             # Monitor both Ruby and JavaScript tests.

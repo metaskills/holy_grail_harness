@@ -6,7 +6,7 @@ class window.HolyGrailHarness.App.Views.Index extends View
         @div class: 'span2', =>
           @img src: '/assets/holy_grail_harness.png', width: '162', height: '272'
         @div class: 'span10', =>
-          @h1 'Holy Grail Harness', style: "font-family:'Helvetica Neue'; font-size:60px; color:rgb(90,90,90); font-weight:200; margin-top:50px;"
+          @h1 'HolyGrailHarness', style: "font-family:'Helvetica Neue'; font-size:60px; color:rgb(90,90,90); font-weight:200; margin-top:50px;"
           @div class: 'well well-large', =>
             @p =>
               @raw """

@@ -32,7 +32,7 @@ class Setup < Thor::Group
           gsub_file filepath, 'holy_grail_harness', new_app_name_file if data.include? 'holy_grail_harness'
         end
         if filepath.match /\/holy_grail_harness(\z|\.\w+\z)/
-          newpath = filepath.tr 'holy_grail_harness', new_app_name_file
+          newpath = filepath.gsub 'holy_grail_harness', new_app_name_file
           FileUtils.mv filepath, newpath
         end
       end

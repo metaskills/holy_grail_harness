@@ -1,22 +1,34 @@
 require 'rails/generators'
+require 'active_support/core_ext/string/inflections'
 
 class Setup < Thor::Group
 
-  # include Thor::Actions
-  # include Rails::Generators::Actions
-  # Rails::Generators::Base
+  include Thor::Actions
 
-  desc 'Setup your Rails application with your new name.'
-  def foo(my_app_name)
-    puts my_app_name.inspect
+  argument :my_app_name, type: 'string', required: true, desc: 'The name of your new application.'
+  desc "Setup your Rails application using the given 'my_app_name'."
+
+  def create_new_secret_token
+    in_root do
+      @secret_token = run("#{extify(:rake)} secret", verbose: false, capture: true).strip
+      gsub_file 'config/initializers/secret_token.rb', replace_flag, @secret_token, verbose: false
+    end
+  end
+
+
+  protected
+
+  def app
+    @app ||= Rails::Generators::Base.new
+  end
+
+  def extify(name)
+    app.send :extify, name
+  end
+
+  def replace_flag
+    "<REPLACEME>"
   end
 
 end
 
-
-# in_root { run_ruby_script("script/rails generate #{what} #{argument}", :verbose => false) }
-# rake "db:migrate"
-# inject_into_file 'config/routes.rb', "\n  #{routing_code}\n", { :after => /\.routes\.draw do(?:\s*\|map\|)?\s*$/, :verbose => false }
-# append_file "Gemfile", str, :verbose => false
-# prepend_file "Gemfile", "source #{source.inspect}\n", :verbose => false
-# create_file("vendor/#{filename}", data, :verbose => false, &block)

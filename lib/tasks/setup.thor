@@ -15,7 +15,7 @@ class Setup < Thor::Group
 
   def clean_prototype_application
     in_root do
-      # run 'rm -rf .git'
+      # remove_dir '.git'
       remove_file 'app/assets/images/holy_grail_harness.png'
       remove_file 'app/assets/images/holy_grail_harness.pxm'
       remove_file 'README.md'

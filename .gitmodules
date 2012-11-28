@@ -1,0 +1,3 @@
+[submodule "vendor/assets/javascripts/spine"]
+	path = vendor/assets/javascripts/spine
+	url = git://github.com/maccman/spine.git

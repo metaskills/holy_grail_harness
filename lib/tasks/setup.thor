@@ -16,6 +16,10 @@ class Setup < Thor::Group
       remove_file 'app/assets/images/holy_grail_harness.pxm'
       remove_file 'README.md'
       create_file 'README.md', "# #{new_app_name_ruby}"
+      remove_dir  'tmp'
+      empty_directory 'tmp'
+      empty_directory 'tmp/cache'
+      empty_directory 'tmp/cache/assets'
       remove_dir  'vendor/assets/javascripts/spine'
     end
   end

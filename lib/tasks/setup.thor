@@ -40,7 +40,7 @@ class Setup < Thor::Group
   def create_new_secret_token
     in_root do
       @secret_token = run("#{extify(:rake)} secret", capture: true).strip
-      gsub_file 'config/initializers/secret_token.rb', replace_flag, @secret_token
+      gsub_file 'config/initializers/secret_token.rb', '012345678901234567890123456789', @secret_token
     end
   end
 
@@ -99,10 +99,6 @@ class window.#{new_app_name_ruby}.App.Views.Index extends View
 
   def new_app_name_ruby
     my_app_name.camelize
-  end
-
-  def replace_flag
-    "<HGH_REPLACEME>"
   end
 
   def spinejs?

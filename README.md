@@ -7,6 +7,13 @@ A bootstrapped Rails application prototype that focuses on simple test patterns 
 
 Unlike normal [Rails Application Templates](http://guides.rubyonrails.org/rails_application_templates.html) or more modern Rails application generators like [Rails Composer](http://railsapps.github.com/rails-composer/), the HolyGrailHarness is a basic Rails application that can be considered a prototype and customized via a simple setup script. It is also somewhat opinionated in that it pushes what I believe are the most simple and powerful testing choices. It focus on using Ruby 1.9 or 2.0, MiniTest::Spec, Capybara, Poltergeist, and Konacha. More details on each component and what HolyGrailHarness provides are below.
 
+The HolyGrailHarness is perfect for any of the following 
+
+* Bootstrapping your next Rails application.
+* Learning and promoting MiniTest::Spec
+* Modern JavaScript testing setups.
+* Teaching Rails and/or JavaScript at your next meetup.
+
 
 # Usage
 

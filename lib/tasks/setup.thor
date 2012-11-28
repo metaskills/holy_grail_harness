@@ -10,17 +10,21 @@ class Setup < Thor::Group
 
   def clean_prototype_application
     in_root do
-      remove_dir  '.git'
-      remove_file '.gitmodules'
-      remove_file 'app/assets/images/holy_grail_harness.png'
-      remove_file 'app/assets/images/holy_grail_harness.pxm'
-      remove_file 'README.md'
-      create_file 'README.md', "# #{new_app_name_ruby}"
-      remove_dir  'tmp'
+      remove_dir      '.git'
+      remove_file     '.gitmodules'
+      remove_file     'app/assets/images/holy_grail_harness.png'
+      remove_file     'app/assets/images/holy_grail_harness.pxm'
+      remove_file     'README.md'
+      create_file     'README.md', "# #{new_app_name_ruby}"
+      remove_dir      'log'
+      empty_directory 'log'
+      log :touch,     'log/.gitkeep'
+      FileUtils.touch 'log/.gitkeep'
+      remove_dir      'tmp'
       empty_directory 'tmp'
       empty_directory 'tmp/cache'
       empty_directory 'tmp/cache/assets'
-      remove_dir  'vendor/assets/javascripts/spine'
+      remove_dir      'vendor/assets/javascripts/spine'
     end
   end
 
@@ -32,6 +36,8 @@ class Setup < Thor::Group
           gsub_file filepath, 'HolyGrailHarness', new_app_name_ruby if data.include? 'HolyGrailHarness'
           gsub_file filepath, 'holy_grail_harness', new_app_name_file if data.include? 'holy_grail_harness'
         end
+      end
+      Dir["**/*"].each do |filepath|
         if filepath.match /\/holy_grail_harness(\z|\.\w+\z)/
           newpath = filepath.gsub 'holy_grail_harness', new_app_name_file
           log :move, filepath
@@ -62,17 +68,20 @@ class window.#{new_app_name_ruby}.App.Views.Index extends View
         remove_file "app/assets/javascripts/#{new_app_name_file}/views/index.js.coffee"
         remove_file "app/assets/javascripts/#{new_app_name_file}/index.js.coffee"
         create_file "app/assets/javascripts/#{new_app_name_file}/index.js.coffee", %|
+#= require ./lib/namespaces
 #= require_tree ./views
 #= require_tree ./models
 #= require_tree ./controllers
 #= require_self
+
+$ -> $('body').append "<h1>#{new_app_name_ruby}</h1>"
 |.strip
-        gsub_file "app/assets/javascripts/application.js", /\A(.*)#{new_app_name_ruby}\.Notifications\.appReady callback/, '\1callback()', verbose: false
-        gsub_file "app/views/layouts/application.html.erb", /\A(.*)#{new_app_name_ruby}\.App\.Index\.init.*\Z/, '', verbose: false
-        gsub_file "spec/javascripts/spec_helper/fixtures.js.coffee", /\A(.*)#{new_app_name_ruby}\.Notifications\.appReady callback/, '\1callback()', verbose: false
-        gsub_file "spec/javascripts/spec_helper/fixtures.js.coffee", /\A.*#{new_app_name_ruby}\.App\.Index\.init\(\).*\Z/, '', verbose: false
-        gsub_file "spec/javascripts/spec_helper/helpers.js.coffee", /\A.*Spine.*\Z/, '', verbose: false
-        gsub_file "spec/javascripts/app_spec.js.coffee", /\A.*renders|@body.*\Z/, '', verbose: false
+        gsub_file "app/views/layouts/application.html.erb", /^.*#{new_app_name_ruby}\.App\.Index\.init.*$\n/, ''
+        gsub_file "spec/javascripts/spec_helper/fixtures.js.coffee", /^(.*)#{new_app_name_ruby}\.Notifications\.appReady callback/, '\1callback()'
+        gsub_file "spec/javascripts/spec_helper/fixtures.js.coffee", /^.*#{new_app_name_ruby}\.App\.Index\.init\(\).*$\n/, ''
+        gsub_file "spec/javascripts/spec_helper/helpers.js.coffee", /^.*Spine.*$\n/, ''
+        gsub_file "spec/javascripts/spec_helper.js.coffee", /^.*#{new_app_name_ruby}\.Application\.render\(\).*$\n/, ''
+        gsub_file "spec/javascripts/app_spec.js.coffee", /^.*(renders|@body).*$\n/, ''
       end
     end
   end
@@ -80,16 +89,16 @@ class window.#{new_app_name_ruby}.App.Views.Index extends View
   def new_git_repo
     in_root do 
       git :init
-      git :add => '.'
-      git :commit => "-a -m 'Initial Rails application.'"
+      git 'add .'
+      git "commit -a -m 'Initial Rails application.'", capture: true
     end
   end
 
   def post_new_git_repo
     in_root do
       if spinejs?
-        git "submodule add git://github.com/maccman/spine.git vendor/assets/javascripts/spine"
-        git :commit => "-a -m 'Vendor Spine JavaScript framework.'"
+        git "submodule add git://github.com/maccman/spine.git vendor/assets/javascripts/spine", capture: true
+        git "commit -a -m 'Vendor Spine JavaScript framework.'", capture: true
       end
     end
   end
@@ -124,6 +133,14 @@ class window.#{new_app_name_ruby}.App.Views.Index extends View
 
   def git(commands={})
     app.git commands
+  end
+
+  def mute
+    app.shell.mute { shell.mute { yield } }
+  end
+
+  def git(command, options={})
+    run "git #{command}", options
   end
 
 

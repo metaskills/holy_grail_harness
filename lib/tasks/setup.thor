@@ -16,8 +16,26 @@ class Setup < Thor::Group
   def clean_prototype_application
     in_root do
       # run 'rm -rf .git'
-      run 'rm -rf README.md'
-      create_file "README.md", "# #{my_app_name.camelize}"
+      remove_file 'app/assets/images/holy_grail_harness.png'
+      remove_file 'app/assets/images/holy_grail_harness.pxm'
+      remove_file 'README.md'
+      create_file "README.md", "# #{new_app_name_ruby}"
+    end
+  end
+
+  def search_and_replace_new_app_name
+    in_root do
+      Dir["**/*"].each do |filepath|
+        if File.file?(filepath) && File.expand_path(filepath) != __FILE__
+          data = File.read(filepath)
+          gsub_file filepath, 'HolyGrailHarness', new_app_name_ruby if data.include? 'HolyGrailHarness'
+          gsub_file filepath, 'holy_grail_harness', new_app_name_file if data.include? 'holy_grail_harness'
+        end
+        if filepath.match /\/holy_grail_harness(\z|\.\w+\z)/
+          newpath = filepath.tr 'holy_grail_harness', new_app_name_file
+          FileUtils.mv filepath, newpath
+        end
+      end
     end
   end
 
@@ -39,12 +57,20 @@ class Setup < Thor::Group
     app.send *args.unshift(:log)
   end
 
+  def new_app_name_file
+    my_app_name.underscore
+  end
+
+  def new_app_name_ruby
+    my_app_name.camelize
+  end
+
   def extify(name)
     app.send :extify, name
   end
 
   def replace_flag
-    "<REPLACEME>"
+    "<HGH_REPLACEME>"
   end
 
 end

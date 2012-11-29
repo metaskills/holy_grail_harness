@@ -29,13 +29,6 @@ Super simple. Just follow these steps below. Make sure to replace `my_app_name` 
 
 # Setup Script Notes
 
-* Things you may want to do manually...
-  * Remove root route (root :to => 'application#index')
-  * Remove index action (def index ; render text: "", layout: true ; end)
-* Test
-  - Intergration - Remove or clear out.
-* Remove thor/setup script files. Self implode.
-* Rename parent directory.
 * Display some final message
   - Detect if they have PhantomJS bin in PATH or not.
 

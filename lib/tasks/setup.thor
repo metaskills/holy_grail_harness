@@ -86,6 +86,10 @@ $ -> $('body').append "<h1>#{new_app_name_ruby}</h1>"
     end
   end
 
+  def remove_the_very_pants_i_was_returning
+    remove_file __FILE__
+  end
+
   def new_git_repo
     in_root do 
       git :init
@@ -101,6 +105,13 @@ $ -> $('body').append "<h1>#{new_app_name_ruby}</h1>"
         git "commit -a -m 'Vendor Spine JavaScript framework.'", capture: true
       end
     end
+  end
+
+  def rename_parent_directory
+    log :rename, destination_root
+    new_destination_root = destination_root.sub /holy_grail_harness$/, new_app_name_file
+    FileUtils.mv destination_root, new_destination_root
+    self.destination_root = new_destination_root
   end
 
 
@@ -129,10 +140,6 @@ $ -> $('body').append "<h1>#{new_app_name_ruby}</h1>"
 
   def extify(name)
     app.send :extify, name
-  end
-
-  def git(commands={})
-    app.git commands
   end
 
   def mute

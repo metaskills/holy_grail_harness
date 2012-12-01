@@ -27,12 +27,6 @@ Super simple. Just follow these steps below. Make sure to replace `my_app_name` 
 **Why not a normal Rails application template?** I am very persnickety about how I like to organize my code and application directories. Although, Rails application templates provide a really nice feature set. It was much easier for me to bootstrap a new Rails application using this prototype method. The end result is a cleaner Gemfile and application setup that can be vetted and tested from within HolyGrailHarness itself.
 
 
-# Setup Script Notes
-
-* Display some final message
-  - Detect if they have PhantomJS bin in PATH or not.
-
- 
 # Testing
 
 * Latest Rails 3.x and jQuery 1.8

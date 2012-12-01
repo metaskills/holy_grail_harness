@@ -114,6 +114,22 @@ $ -> $('body').append "<h1>#{new_app_name_ruby}</h1>"
     self.destination_root = new_destination_root
   end
 
+  def finish_up
+    say "
++----------------------------------------------------------------------+
+|  We renamed the current directory for you. Please run this command.  |
+|  $ cd ../#{new_app_name_file}#{' ' * (new_app_name_file.length + 30)}|
++----------------------------------------------------------------------+", :green
+    `which phantomjs`
+    if $? != 0
+      say "
+|  I noticed that you do not have PhantomJS in your path. Go download  |
+|  binary packages here. <http://phantomjs.org/download.html>          |
++----------------------------------------------------------------------+".strip, :red
+    end
+    say ""
+  end
+
 
   protected
 

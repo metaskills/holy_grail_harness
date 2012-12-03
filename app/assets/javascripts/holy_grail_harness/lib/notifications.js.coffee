@@ -1,7 +1,7 @@
 ###
 A single PubSub notification center.
 ###
-class window.HolyGrailHarness.Notifications extends Spine.Module
+class @HolyGrailHarness.Notifications extends Spine.Module
 
   @extend Spine.Events
 

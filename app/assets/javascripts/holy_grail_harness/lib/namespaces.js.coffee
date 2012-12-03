@@ -1,5 +1,5 @@
 
-window.HolyGrailHarness =
+@HolyGrailHarness =
   App:
     Controllers: {}
     Models: {}

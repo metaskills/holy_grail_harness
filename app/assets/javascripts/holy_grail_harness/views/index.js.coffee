@@ -1,4 +1,4 @@
-class window.HolyGrailHarness.App.Views.Index extends View
+class @HolyGrailHarness.App.Views.Index extends View
   
   @content: ->
     @div class: 'container', style: 'margin-top:40px;', =>

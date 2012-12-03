@@ -10,7 +10,7 @@
 #= require_tree ./controllers
 #= require_self
 
-class window.HolyGrailHarness.App.Index extends Spine.Controller
+class @HolyGrailHarness.App.Index extends Spine.Controller
 
   @init: ->
     HolyGrailHarness.Application or= new this

@@ -30,6 +30,10 @@ module ActionDispatch
       system "open #{file}"
     end
     alias_method :page!, :save_and_open_page
+
+    def execjs(string)
+      page.evaluate_script(string)
+    end
     
   end
   

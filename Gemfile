@@ -29,6 +29,7 @@ end
 
 group :development, :test do
   gem 'chai-jquery-rails'
+  gem 'forgery'
   gem 'guard-minitest'
   gem 'guard-konacha'
   gem 'konacha'

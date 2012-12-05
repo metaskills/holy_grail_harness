@@ -34,4 +34,8 @@ HolyGrailHarness::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # NamedSeeds
+  config.named_seeds.app_load_seed = true
+  
 end

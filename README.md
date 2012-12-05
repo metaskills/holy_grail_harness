@@ -123,20 +123,51 @@ The Guardfile assumes you are running OS X and wish to use the Ruby GNTP (Growl 
 
 #### Factories And Fixtures
 
-ActiveRecord YAML fixtures suck, but so do slow tests that rely on an empty database with excessive setups based on factories. 
+ActiveRecord YAML fixtures suck, but so do slow tests that rely on an empty database with excessive setups based on factories. The answer? Take advantage of the best each has to offer. Use factories to populate fixtures into the test database while leveraging database transactions during your test runs. The end result is a known factory story with the ability to create more test data as needed using the same factories. Allowing factories to properly hook into model logic means no more decomposing business logic into YAML text files. How?
 
-* YAML fixtures suck, but facories dont!
-  NamedSeeds - Short intro https://github.com/metaskills/named_seeds
-  FactoryGirl - https://github.com/thoughtbot/factory_girl
-  Removed test/fixtures
-  Created test/factories
-  FactoryGirl.define do
-    factory :user do
-      # ...    
-    end
+The HolyGrailHarness bundles the [named_seeds](https://github.com/metaskills/named_seeds) gem along with the [factory_girl](https://github.com/thoughtbot/factory_girl) gem. The NamedSeeds library checks for the existence of a [`db/test/seeds.rb`](https://github.com/metaskills/holy_grail_harness/blob/master/db/test/seeds.rb) file and if present, loads that file. Just like Rails' own `db/seeds.rb` anything in this file goes. The only difference is that this seed file is populated right before you tests are run so they persist between transactions. You also get the benefit of using this same seed data in development as part of the normal Rails `db:setup` process. Read the [full documentationn](https://github.com/metaskills/named_seeds#namedseeds) on their site on how to use it. Below is a brief example.
+
+Create factories in the `test/factories` directory. Note, factories are best when they make `valid garbage™`, so the HolyGrailHarness also requires the [forgery](https://github.com/sevenwire/forgery) gem to help with that.
+
+```ruby
+# In test/factories/user_factory.rb
+
+FactoryGirl.define do
+  
+  factory :user do
+    email      { Forgery::Email.address }
+    first_name { Forgery::Name.first_name }
+    last_name  { Forgery::Name.first_name }
+    password   'test'  
   end
+  
+end
+```
 
+When making seed data, be explicit with your attributes that may be forged in the factory, database seeds should be consistent and have meaningful attributes. In this example we are creating an admin user. Note too how we are using `NamedSeeds.identify` which mimics AcctiveRecord's fixture identity. This gives us a handle to the fixture within our tests. We also create the `@admin` instance variable because we might want to use that user later on in the fixture story.
 
+```ruby
+# In db/test/seeds.rb
+
+require 'factory_girl'
+FactoryGirl.find_definitions rescue true
+include FactoryGirl::Syntax::Methods
+
+@admin = create :user, id: NamedSeeds.identify(:admin), 
+                       first_name: 'Admin', last_name: 'User', email: 'admin@test.com'
+```
+
+ Lastly, in your [`test/test_helper.rb`](https://github.com/metaskills/holy_grail_harness/blob/master/test/test_helper.rb) file, declare that you have a named seed to the users model. This will allow all your test to act just like ActiveRecord fixtures and use the `users(:admin)` helper to get to that seeded fixture.
+
+```
+# In test/test_helper.rb
+
+class ActiveSupport::TestCase
+  
+  named_seeds :users
+
+end
+```
 
 
 # MVC JavaScript

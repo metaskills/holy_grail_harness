@@ -121,6 +121,23 @@ $ guard -g js       # Monitor JavaScript tests.
 
 The Guardfile assumes you are running OS X and wish to use the Ruby GNTP (Growl Notification Transport Protocol). If this is not the case, consult the Guard documentation on different [system notification](https://github.com/guard/guard#system-notifications) alternatives.
 
+#### Factories And Fixtures
+
+ActiveRecord YAML fixtures suck, but so do slow tests that rely on an empty database with excessive setups based on factories. 
+
+* YAML fixtures suck, but facories dont!
+  NamedSeeds - Short intro https://github.com/metaskills/named_seeds
+  FactoryGirl - https://github.com/thoughtbot/factory_girl
+  Removed test/fixtures
+  Created test/factories
+  FactoryGirl.define do
+    factory :user do
+      # ...    
+    end
+  end
+
+
+
 
 # MVC JavaScript
 
@@ -154,31 +171,92 @@ By default the [`index.js.coffee`](https://github.com/metaskills/holy_grail_harn
 No JavaScript project should be without a local notification system to help keep disparate components up to date. Thankfully, Spine's event module makes a local PubSub system a breeze. The HolyGrailHarness has a [`notifications.js.coffee`](https://github.com/metaskills/holy_grail_harness/blob/master/app/assets/javascripts/holy_grail_harness/lib/notifications.js.coffee) that exposes a class level `bind()` and `trigger()` to any event string/namespace you want. To make more simple, we recommend creating class level functions that expose the event name as the function name and pass the args to the `handle()` function. We have done this for the `MyAppName.Notifications.appReady()` to demonstrate. Calling this function will trigger the `app.ready` event and passing a function to this function will bind that function to the same event name.
 
 
-# Sass, Compass, Bootstrap
+# Sass & Compass
+
+[Sass](http://sass-lang.com) is the only way to write CSS for today's modern web applications. [Compass](http://compass-style.org) is the CSS framework that no Sass user should go without. Together they provide a foundation for writing beautiful CSS using pre-built time saving functions. The HolyGrailHarness includes both the [sass-rails](https://github.com/rails/sass-rails) and [compass-rails](https://github.com/Compass/compass-rails) gems.
+
+To get you started on the right path, we have also created a basic structure within the `app/assets/stylesheets` asset pipeline directory to help you organize your Sass files. Here is the directory structure below.
+
+```
+├── application.css
+├── application
+│   ├── _layout.scss
+│   ├── index.scss
+│   ├── components
+│   │   └── _foo.scss
+└── shared
+    ├── _animations.scss
+    ├── _fonts.scss
+    ├── _mixins.scss
+    ├── _placeholders.scss
+    ├── _variables.scss
+    └── base.scss
+```
+
+#### The application.css file.
+
+Never write CSS in `application.css`. Say what? I know right, but trust me. Just consider this file a top level bundle dependency that only requires other top level bundle assets. Here is the contents of that file. Notice how it requires a bundle called twitter and an index. One is for twitter bootstrap, see section below, and the other is the index to your own Sass framework.
+
+```css
+/*
+ *= require application/twitter
+ *= require application/index
+*/
+```
+
+#### The shared directory.
+
+Think of this as your own Compass framework. The [`base.scss`](https://github.com/metaskills/holy_grail_harness/blob/master/app/assets/stylesheets/shared/base.scss) is your single file to `@import` to get everything loaded and ready to go. **Nothing in any of the shared files should generate CSS!** Importing `shared/base` should act just like importing `compass`. Use these files for setting your own variables and creating misc helper functions & mixins. There is a variables file for... variables! Another for animations, fonts and mixins too.
+
+Pay special attention to the `_placeholders.scss` file. If you do not know about Sass 3.2's placeholder selectors (silent classes) and how they make presentational classes efficiently extended by semantic ones, then I highly suggest you read Dale Sande's presentation titled [Sass 3.2 Silent Classes](https://speakerdeck.com/anotheruiguy/sass-32-silent-classes) on Speaker Deck.
+
+Below is the contents of the `base.scss` file, take note of the order. See too how we import the entire Compass framework too. This means that all of your Sass code in any of the shared files can take full advantage of both Bootstrap and Compass' variables and mixins. Epic win!
+
+```sass
+// Think of this file as your own compass. Importing the base, never generates CSS.
+
+@import "shared/variables";
+@import "bootstrap/mixins";
+@import "compass";
+@import "compass/layout";
+@import "compass/css3/user-interface";
+@import "shared/fonts";
+@import "shared/mixins";
+@import "shared/animations";
+@import "shared/placeholders";
+```
+
+#### The application directory.
+
+Organize this as you see fit. We have started you off by creating a `_layout.scss` file for your general layout/structure styles. There is also a `components` directory which all sub files are imported via a glob. The idea is that components are not dependent upon another. Files that might go in here are things like datepicker, navigation, and general files named after components or widgets. Below is what the `application/index.scss` looks like.
+
+```sass
+@import "shared/base";
+@import "./layout";
+@import "components/*";
+```
 
 
+# Twitter Bootstrap
 
+[Twitter Bootstrap](http://twitter.github.com/bootstrap/) is awesome, but [LESS is not](http://metaskills.net/2012/02/27/too-less-should-you-be-using-sass/). That is why the HolyGrailHarness uses the [bootstrap-sass](https://github.com/thomas-mcdonald/bootstrap-sass) gem that converts all the Bootstrap LESS files to Sass. Making them ready to import via the Rails asset pipeline.
 
-# Etc
+As shown above in the Sass section, we require the `application/twitter.scss` bundle asset from the top level `application.css` bundle file. This twitter bundle file, contents below, take advantage of your shared variables before importing bootstrap from the gem. In this way you can define variables that tweak bootstrap. A good example would be button colors, column widths, etc. Later on in the file you can extend bootstrap styles to your liking. For instance, add more padding to buttons.
 
-* Sass, silent classes, structure.
-  - https://speakerdeck.com/anotheruiguy/sass-32-silent-classes
-* Font Awesome http://fortawesome.github.com/Font-Awesome/
-* Bootstrap
+```sass
+@import "shared/variables";
+@import "bootstrap";
+@import "font-awesome";
 
+// Tweak or redefine Twitter classes below.
+```
 
-# Extras
+#### Font Awesome
 
-* YAML fixtures suck, but facories dont!
-  NamedSeeds - Short intro https://github.com/metaskills/named_seeds
-  FactoryGirl - https://github.com/thoughtbot/factory_girl
-  Removed test/fixtures
-  Created test/factories
-  FactoryGirl.define do
-    factory :user do
-      # ...    
-    end
-  end
+The glyph icons included in Twitter Bootstrap are horrible for hi-resolution "retina" displays typically found on mobile devices. Thankfully the [Font Awesome](http://fortawesome.github.com/Font-Awesome/) project provides a drop in replacement that instead uses icon fonts vs raster images. 
+
+The HolyGrailHarness vendors these font files and the needed `font-awesome.scss` file and requires them as part of the Twitter Bootstrap bundle shown above.
+
 
 
 

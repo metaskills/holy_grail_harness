@@ -157,7 +157,7 @@ include FactoryGirl::Syntax::Methods
                        first_name: 'Admin', last_name: 'User', email: 'admin@test.com'
 ```
 
- Lastly, in your [`test/test_helper.rb`](https://github.com/metaskills/holy_grail_harness/blob/master/test/test_helper.rb) file, declare that you have a named seed to the users model. This will allow all your test to act just like ActiveRecord fixtures and use the `users(:admin)` helper to get to that seeded fixture.
+ Lastly, in your [`test/test_helper.rb`](https://github.com/metaskills/holy_grail_harness/blob/master/test/test_helper.rb) file, declare that you have a named seed to the users model. This will allow your tests to act just like those with ActiveRecord fixtures and use the `users(:admin)` helper to get to that seeded fixture.
 
 ```ruby
 # In test/test_helper.rb
@@ -194,7 +194,7 @@ By default the [`index.js.coffee`](https://github.com/metaskills/holy_grail_harn
 ```coffeescript
 @initApplication = (callback) =>
   bob = MyAppName.Test.Seeds.users.bob
-  $.mockjax url: "/users/#{bob.id}", responseText: HolyGrailHarness.Test.Response.bobInitial.responseText
+  $.mockjax url: "/users/#{bob.id}", responseText: MyAppName.Test.Response.bobInitial.responseText
   MyAppName.App.Models.User.fetch id: bob.id
   MyAppName.App.Models.User.one 'refresh', callback
 ```
@@ -241,7 +241,7 @@ Think of this as your own Compass framework. The [`base.scss`](https://github.co
 
 Pay special attention to the `_placeholders.scss` file. If you do not know about Sass 3.2's placeholder selectors (silent classes) and how they make presentational classes efficiently extended by semantic ones, then I highly suggest you read Dale Sande's presentation titled [Sass 3.2 Silent Classes](https://speakerdeck.com/anotheruiguy/sass-32-silent-classes) on Speaker Deck.
 
-Below is the contents of the `base.scss` file, take note of the order. See too how we import the entire Compass framework too. This means that all of your Sass code in any of the shared files can take full advantage of both Bootstrap and Compass' variables and mixins. Epic win!
+Below is the contents of the `base.scss` file, take note of the order. See too how we import the entire Compass framework. This means that all of your Sass code in any of the shared files can take full advantage of both Bootstrap and Compass' variables and mixins. Epic win!
 
 ```sass
 // Think of this file as your own compass. Importing the base, never generates CSS.

@@ -17,8 +17,8 @@ The HolyGrailHarness is perfect for any of the following:
 
 # Usage
 
-  1. [Download](https://github.com/metaskills/holy_grail_harness/archive/master.zip) the project.
-  2. Now from the root of "holy_grail_harness" directory.
+  * [Download](https://github.com/metaskills/holy_grail_harness/archive/master.zip) the project.
+  * Now from the root of "holy_grail_harness" directory.
 
 ```shell
 $ bundle install
@@ -38,11 +38,11 @@ This application prototype will focus on the latest Rails version. At this time,
 
 # Testing
 
-#### MiniTest::Spec All The Way Across The Sky!
+### MiniTest::Spec All The Way Across The Sky!
 
 Don't wait for Rails 4 to use MiniTest::Spec! This application is using the [minitest-spec-rails](https://github.com/metaskills/minitest-spec-rails) gem which forces `ActiveSupport::TestCase` to subclass `MiniTesst::Spec`. This means that you can start using the MiniTest's Spec or Unit structure and assertions directly within the familiar Rails unit, functional, or integration directories. For full details, check out the [minitest-spec-rails](https://github.com/metaskills/minitest-spec-rails) documentation or some of the [test shims](https://github.com/metaskills/holy_grail_harness/blob/master/test/functional/application_controller_test.rb) within HolyGrailHarness. For example, a `test/unit/user_test.rb` might look like this.
 
-```
+```ruby
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
@@ -58,7 +58,7 @@ class UserTest < ActiveSupport::TestCase
 end
 ```
 
-#### Capybara Integration Tests With Poltergeist Using PhantomJS
+### Capybara Integration Tests With Poltergeist Using PhantomJS
 
 You don't need Cucumber to write good integration tests. Instead use the basic [Capybara DSL](https://github.com/jnicklas/capybara#the-dsl) directly within a Rails integration tests with the most bad ass driver available, [Poltergeist](https://github.com/jonleighton/poltergeist), which is built on top of [PhantomJS](http://phantomjs.org). Never again worry about installing Qt so you can compile capybara-webkit, just go download a [pre-compiled PhantomJS binary](http://phantomjs.org/download.html) for your specific platform and enjoy 20% faster integration test runs vs capybara-webkit.
 
@@ -88,7 +88,7 @@ class ApplicationTest < ActionDispatch::IntegrationTest
 end
 ```
 
-#### Konacha JavaScript Tests Using PhantomJS
+### Konacha JavaScript Tests Using PhantomJS
 
 Move over Jasmine(rice), [Konacha](https://github.com/jfirebaugh/konacha) is the way to test your JavaScript now. Konacha is a Rails engine that allows you to test your JavaScript with the [Mocha](http://visionmedia.github.com/mocha/) test framework and [Chai](http://chaijs.com) assertion library. Konacha's killer feature is a sandboxed `<iframe>` for each test spec to run within as well as full Rails asset pipeline integration. The HolyGrailHarness does all the work to get your Konacha `spec/javascripts` directory all setup and ready to go. Highlights include:
 
@@ -109,11 +109,11 @@ Because your CI system should run all your tests, the HolyGrailHarness has added
 $ rake test:all     # Runs all Rails tests, then Konacha tests.
 ```
 
-#### Guard
+### Guard
 
 TDD in style and run your tests when you hit save! Both [guard-minitest](https://github.com/guard/guard-minitest) and [guard-konacha](https://github.com/alexgb/guard-konacha) are bundled and ready to go. A basic `Guardfile` is already setup too. Unlike most, this one is split into two groups `:ruby` or `:js`. This lets you focus on either everything or a specific language for your tests.
 
-```
+```shell
 $ guard             # Monitor both Ruby and JavaScript tests.
 $ guard -g ruby     # Monitor Ruby tests.
 $ guard -g js       # Monitor JavaScript tests.
@@ -121,7 +121,7 @@ $ guard -g js       # Monitor JavaScript tests.
 
 The Guardfile assumes you are running OS X and wish to use the Ruby GNTP (Growl Notification Transport Protocol). If this is not the case, consult the Guard documentation on different [system notification](https://github.com/guard/guard#system-notifications) alternatives.
 
-#### Factories And Fixtures
+### Factories And Fixtures
 
 ActiveRecord YAML fixtures suck, but so do slow tests that rely on an empty database with excessive setups based on factories. The answer? Take advantage of the best each has to offer. Use factories to populate fixtures into the test database while leveraging database transactions during your test runs. The end result is a known factory story with the ability to create more test data as needed using the same factories. Allowing factories to properly hook into model logic means no more decomposing business logic into YAML text files. How?
 
@@ -159,7 +159,7 @@ include FactoryGirl::Syntax::Methods
 
  Lastly, in your [`test/test_helper.rb`](https://github.com/metaskills/holy_grail_harness/blob/master/test/test_helper.rb) file, declare that you have a named seed to the users model. This will allow all your test to act just like ActiveRecord fixtures and use the `users(:admin)` helper to get to that seeded fixture.
 
-```
+```ruby
 # In test/test_helper.rb
 
 class ActiveSupport::TestCase
@@ -185,7 +185,7 @@ The main [`application.js`](https://github.com/metaskills/holy_grail_harness/blo
 
 Also included is the [SpacePen](https://github.com/nathansobo/space-pen) view framework. SpacePen is a powerful and minimalist client-side view framework authored in CoffeeScript. It is actually a jQuery subclass which makes your views really easy to traverse and respond to controller events. Read my [*View Controller Patterns With Spine.js & SpacePen*](http://metaskills.net/2012/05/22/view-controller-patterns-with-spine-js-and-spacepen/) article to learn why views should not be dumb and how you can take advantage of SpacePen no matter what JavaScript MV* framework you use.
 
-#### With Spine.js
+### With Spine.js
 
 If you choose to use Spine.js as your JavaScript MVC structure, the setup script will create a git submodule to the Spine repository to the `vendor/assets/javascripts/spine` directory. This allows your project to use the the source CoffeeScript files, which makes for a wonderful [learning experience](http://metaskills.net/2012/01/15/rails-and-spine-js-using-the-coffeescript-source/) to both Spine.js and idomatic CoffeeScript. 
 
@@ -224,7 +224,7 @@ To get you started on the right path, we have also created a basic structure wit
     └── base.scss
 ```
 
-#### The application.css file.
+### The application.css file.
 
 Never write CSS in `application.css`. Say what? I know right, but trust me. Just consider this file a top level bundle dependency that only requires other top level bundle assets. Here is the contents of that file. Notice how it requires a bundle called twitter and an index. One is for twitter bootstrap, see section below, and the other is the index to your own Sass framework.
 
@@ -235,7 +235,7 @@ Never write CSS in `application.css`. Say what? I know right, but trust me. Just
 */
 ```
 
-#### The shared directory.
+### The shared directory.
 
 Think of this as your own Compass framework. The [`base.scss`](https://github.com/metaskills/holy_grail_harness/blob/master/app/assets/stylesheets/shared/base.scss) is your single file to `@import` to get everything loaded and ready to go. **Nothing in any of the shared files should generate CSS!** Importing `shared/base` should act just like importing `compass`. Use these files for setting your own variables and creating misc helper functions & mixins. There is a variables file for... variables! Another for animations, fonts and mixins too.
 
@@ -257,7 +257,7 @@ Below is the contents of the `base.scss` file, take note of the order. See too h
 @import "shared/placeholders";
 ```
 
-#### The application directory.
+### The application directory.
 
 Organize this as you see fit. We have started you off by creating a `_layout.scss` file for your general layout/structure styles. There is also a `components` directory which all sub files are imported via a glob. The idea is that components are not dependent upon another. Files that might go in here are things like datepicker, navigation, and general files named after components or widgets. Below is what the `application/index.scss` looks like.
 
@@ -282,7 +282,7 @@ As shown above in the Sass section, we require the `application/twitter.scss` bu
 // Tweak or redefine Twitter classes below.
 ```
 
-#### Font Awesome
+### Font Awesome
 
 The glyph icons included in Twitter Bootstrap are horrible for hi-resolution "retina" displays typically found on mobile devices. Thankfully the [Font Awesome](http://fortawesome.github.com/Font-Awesome/) project provides a drop in replacement that instead uses icon fonts vs raster images. 
 

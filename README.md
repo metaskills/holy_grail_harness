@@ -5,7 +5,7 @@
 
 A curated Rails application prototype that focuses on simple test patterns for Ruby & JavaScript!
 
-Unlike normal [Rails Application Templates](http://guides.rubyonrails.org/rails_application_templates.html) or more modern Rails application generators like [Rails Composer](http://railsapps.github.com/rails-composer/), the HolyGrailHarness is a basic Rails application that can be considered a prototype and customized via a simple setup script. It is also somewhat opinionated in that it pushes what I believe are the most simple and powerful testing choices. It focus on using Ruby 1.9 and up, MiniTest::Spec, Capybara, Poltergeist/PhantomJS, and Konacha. More details on each component and what HolyGrailHarness provides are below.
+Unlike normal [Rails Application Templates](http://guides.rubyonrails.org/rails_application_templates.html) or more modern Rails application generators like [Rails Composer](http://railsapps.github.com/rails-composer/), the HolyGrailHarness is a basic Rails application that can be considered a prototype and customized via a simple setup script. It is also somewhat opinionated in that it promotes simple and powerful testing choices and focuses on using Ruby 1.9 and up, MiniTest::Spec, Capybara, Poltergeist/PhantomJS, and Konacha. More details on each component and what HolyGrailHarness provides are below.
 
 The HolyGrailHarness is perfect for any of the following:
 
@@ -25,7 +25,7 @@ $ bundle install
 $ bundle exec thor setup my_app_name
 ```
 
-Make sure to replace `my_app_name` above with the name of your new Rails application. The setup script has a few options, but the end result will be a new Rails application all ready to go. **So why not a normal Rails application template?** I am very persnickety about how I like to organize my code and application directories. Although, Rails application templates provide a really nice feature set. It was much easier for me to bootstrap a new Rails application using this prototype method. The end result is a cleaner Gemfile and application setup that can be vetted and tested from within HolyGrailHarness itself.
+Make sure to replace `my_app_name` above with the name of your new Rails application. The setup script has a few options, but the end result will be a new Rails application all ready to go. **So why not a normal Rails application template?** Although, Rails application templates provide a really nice feature set. It was much easier to bootstrap a new Rails application using this prototype method. The end result is a cleaner Gemfile and application setup that can be vetted and tested from within HolyGrailHarness itself.
 
 
 # Rails 3
@@ -40,7 +40,7 @@ This application prototype will focus on the latest Rails version. At this time,
 
 ### MiniTest::Spec All The Way Across The Sky!
 
-Don't wait for Rails 4 to use MiniTest::Spec! This application is using the [minitest-spec-rails](https://github.com/metaskills/minitest-spec-rails) gem which forces `ActiveSupport::TestCase` to subclass `MiniTesst::Spec`. This means that you can start using the MiniTest's Spec or Unit structure and assertions directly within the familiar Rails unit, functional, or integration directories. For full details, check out the [minitest-spec-rails](https://github.com/metaskills/minitest-spec-rails) documentation or some of the [test shims](https://github.com/metaskills/holy_grail_harness/blob/master/test/functional/application_controller_test.rb) within HolyGrailHarness. For example, a `test/unit/user_test.rb` might look like this.
+Don't wait for Rails 4 to use MiniTest::Spec! This application is using the [minitest-spec-rails](https://github.com/metaskills/minitest-spec-rails) gem which forces `ActiveSupport::TestCase` to subclass `MiniTest::Spec`. This means that you can start using the MiniTest's Spec or Unit structure and assertions directly within the familiar Rails unit, functional, or integration directories. For full details, check out the [minitest-spec-rails](https://github.com/metaskills/minitest-spec-rails) documentation or some of the [test shims](https://github.com/metaskills/holy_grail_harness/blob/master/test/functional/application_controller_test.rb) within HolyGrailHarness. For example, a `test/unit/user_test.rb` might look like this.
 
 ```ruby
 require 'test_helper'
@@ -66,7 +66,7 @@ Integration tests are still within the `ActionDispatch::IntegrationTest` class a
 
   * Sets page size to that of a 13" MacBook Air.
   * Resets Capybara sessions after each test.
-  * Provides a `#save_and_open_page` or `#page!` screen shot method.
+  * Provides a `#save_and_open_page`, or `#page!` for short, screen shot method.
   * Ensures a single ActiveRecord DB connection for transactional test runs.
   * An `#execjs` helper for bridging Ruby and the JavaScript under test.
 
@@ -90,7 +90,7 @@ end
 
 ### Konacha JavaScript Tests Using PhantomJS
 
-Move over Jasmine(rice), [Konacha](https://github.com/jfirebaugh/konacha) is the way to test your JavaScript now. Konacha is a Rails engine that allows you to test your JavaScript with the [Mocha](http://visionmedia.github.com/mocha/) test framework and [Chai](http://chaijs.com) assertion library. Konacha's killer feature is a sandboxed `<iframe>` for each test spec to run within as well as full Rails asset pipeline integration. The HolyGrailHarness does all the work to get your Konacha `spec/javascripts` directory all setup and ready to go. Highlights include:
+Move over Jasmine(rice), [Konacha](https://github.com/jfirebaugh/konacha) is the way to test your JavaScript now. Konacha is a Rails engine that allows you to test your JavaScript with the [Mocha](http://visionmedia.github.com/mocha/) test framework and [Chai](http://chaijs.com) assertion library. Konacha's killer feature is a sandboxed `<iframe>` for each test spec to run within as well as full Rails asset pipeline integration. The HolyGrailHarness does all the work to get your Konacha [`spec/javascripts`](https://github.com/metaskills/holy_grail_harness/tree/master/spec/javascripts) directory all setup and ready to go. Highlights include:
 
   * An [initializer](https://github.com/metaskills/holy_grail_harness/blob/master/config/initializers/konacha.rb) that sets up Poltergeist as the Capybara driver.
   * A directory structure for model, view, and controller specs.
@@ -181,7 +181,7 @@ class @MyAppName.App.Models.User extends View
   @configure 'User', 'id', 'email'
 ```
 
-The main [`application.js`](https://github.com/metaskills/holy_grail_harness/blob/master/app/assets/javascripts/application.js) file requires all vendor frameworks, then the [`index.js.coffee`](https://github.com/metaskills/holy_grail_harness/blob/master/app/assets/javascripts/holy_grail_harness/index.js.coffee) of within your application name directory. Use this file to boot your JavaScript application and/or setup your root view controller.
+The main [`application.js`](https://github.com/metaskills/holy_grail_harness/blob/master/app/assets/javascripts/application.js) file requires all vendor frameworks, then the [`index.js.coffee`](https://github.com/metaskills/holy_grail_harness/blob/master/app/assets/javascripts/holy_grail_harness/index.js.coffee) within your application name directory. Use this file to boot your JavaScript application and/or setup your root view controller.
 
 Also included is the [SpacePen](https://github.com/nathansobo/space-pen) view framework. SpacePen is a powerful and minimalist client-side view framework authored in CoffeeScript. It is actually a jQuery subclass which makes your views really easy to traverse and respond to controller events. Read my [*View Controller Patterns With Spine.js & SpacePen*](http://metaskills.net/2012/05/22/view-controller-patterns-with-spine-js-and-spacepen/) article to learn why views should not be dumb and how you can take advantage of SpacePen no matter what JavaScript MV* framework you use.
 

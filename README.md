@@ -27,6 +27,13 @@ $ bundle exec thor setup my_app_name
 
 Make sure to replace `my_app_name` above with the name of your new Rails application. The setup script has a few options, but the end result will be a new Rails application all ready to go. **So why not a normal Rails application template?** Although, Rails application templates provide a really nice feature set. It was much easier to bootstrap a new Rails application using this prototype method. The end result is a cleaner Gemfile and application setup that can be vetted and tested from within HolyGrailHarness itself.
 
+The script will rename your directory and prompt you to `cd` to that directory. Once you do that, run `rake test:all` to see that everything is working.
+
+```shell
+$ cd ../my_app_name
+$ bundle exec rake test:all
+```
+
 
 # Rails 3
 

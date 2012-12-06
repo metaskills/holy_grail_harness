@@ -267,6 +267,8 @@ Organize this as you see fit. We have started you off by creating a `_layout.scs
 @import "components/*";
 ```
 
+If you are more advanced with your CSS and like the idea of style guides, take a looks a the [Toadstool](https://github.com/Anotheruiguy/toadstool) style guide framework.
+
 
 # Twitter Bootstrap
 
@@ -286,8 +288,5 @@ As shown above in the Sass section, we require the `application/twitter.scss` bu
 
 The glyph icons included in Twitter Bootstrap are horrible for hi-resolution "retina" displays typically found on mobile devices. Thankfully the [Font Awesome](http://fortawesome.github.com/Font-Awesome/) project provides a drop in replacement that instead uses icon fonts vs raster images. 
 
-The HolyGrailHarness vendors these font files and the needed `font-awesome.scss` file and requires them as part of the Twitter Bootstrap bundle shown above.
-
-
-
+The HolyGrailHarness vendors these font files and the needed `font-awesome.scss` file and requires them as part of the Twitter Bootstrap bundle shown above. More advanced users may prefer to only include the icon fonts needed in their application or a few custom icons. If that is the case, check out [Font Custom](http://endtwist.github.com/fontcustom/), webfonts from the comfort of the command line.
 

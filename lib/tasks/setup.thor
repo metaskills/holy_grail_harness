@@ -109,7 +109,7 @@ $ -> $('body').append "<h1>#{new_app_name_ruby}</h1>"
 
   def rename_parent_directory
     log :rename, destination_root
-    new_destination_root = destination_root.sub /#{FileUtils.pwd}$/, new_app_name_file
+    new_destination_root = File.join File.dirname(FileUtils.pwd), new_app_name_file
     FileUtils.mv destination_root, new_destination_root
     self.destination_root = new_destination_root
   end

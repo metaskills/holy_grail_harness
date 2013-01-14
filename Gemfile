@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '~> 3.2.9'
+gem 'rails', '~> 3.2.11'
 gem 'sqlite3'
 
 group :assets do

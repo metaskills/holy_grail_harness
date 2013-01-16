@@ -1,4 +1,3 @@
-
 <img src="https://raw.github.com/metaskills/holy_grail_harness/master/app/assets/images/holy_grail_harness.png" height="204" width="120" style="float:left; margin-right:15px;"/>
 
 # HolyGrailHarness
@@ -37,7 +36,7 @@ $ bundle exec rake test:all
 
 # Rails 3
 
-This application prototype will focus on the latest Rails version. At this time, the bundle is locked down to v3.2.9. As Rails updates and is compatible with each component, so will this prototype application be updated. The bundle includes:
+This application prototype will focus on the latest Rails version. At this time, the bundle is locked down to v3.2.11. As Rails updates and is compatible with each component, so will this prototype application be updated. The bundle includes:
 
   * [QuietAssets](https://github.com/evrone/quiet_assets) gem for silent pipeline logging.
   * [Thin](https://github.com/macournoyer/thin/) webserver. Primarily to be automatically used by Konacha but also good for development if you are not using something like [Pow](http://pow.cx).

@@ -22,6 +22,7 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_girl'
   gem 'm'
+  gem 'minitest-focus'
   gem 'minitest-spec-rails'
   gem 'minitest-wscolor'
   gem 'mocha'

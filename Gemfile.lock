@@ -115,6 +115,8 @@ GEM
     method_source (0.8.1)
     mime-types (1.19)
     minitest (4.4.0)
+    minitest-focus (1.0.0)
+      minitest (~> 4.4)
     minitest-spec-rails (4.3.0)
       minitest (~> 4.3)
       rails (>= 3.0)
@@ -226,6 +228,7 @@ DEPENDENCIES
   jquery-rails
   konacha
   m
+  minitest-focus
   minitest-spec-rails
   minitest-wscolor
   mocha

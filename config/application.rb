@@ -3,8 +3,11 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
 # CHANGED: [mocha] Remove when Mocha is updated and less noisy
-require 'mocha/deprecation'
-Mocha::Deprecation.mode = :disabled
+begin
+  require 'mocha/deprecation'
+  Mocha::Deprecation.mode = :disabled
+rescue LoadError
+end
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line

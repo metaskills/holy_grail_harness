@@ -7,6 +7,7 @@ group :assets do
   gem 'bootstrap-sass'
   gem 'coffee-rails'
   gem 'compass-rails'
+  gem 'font-awesome-rails'
   gem 'jquery-rails'
   gem 'sass-rails'
   gem 'therubyracer'
@@ -41,4 +42,3 @@ group :development, :test do
   gem 'rb-fchange', require: false
   gem 'ruby_gntp',  require: false
 end
-

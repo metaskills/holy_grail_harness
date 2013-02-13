@@ -101,7 +101,7 @@ $ -> $('body').append "<h1>#{new_app_name_ruby}</h1>"
   def post_new_git_repo
     in_root do
       if spinejs?
-        git "submodule add git://github.com/maccman/spine.git vendor/assets/javascripts/spine", capture: true
+        git "submodule add git://github.com/spine/spine.git vendor/assets/javascripts/spine", capture: true
         git "commit -a -m 'Vendor Spine JavaScript framework.'", capture: true
       end
     end

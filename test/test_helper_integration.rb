@@ -26,7 +26,8 @@ module ActionDispatch
       file = "#{dir}/#{Time.now.strftime('%Y-%m-%d-%H-%M-%S')}.png"
       FileUtils.mkdir_p dir
       page.driver.render file
-      wait_until { File.exists?(file) }
+      while !File.exists?(file)
+      end
       system "open #{file}"
     end
     alias_method :page!, :save_and_open_page

@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'dotenv' ; Dotenv.load ".env.local", ".env.#{Rails.env}"
 
 # CHANGED: [mocha] Remove when Mocha is updated and less noisy
 begin

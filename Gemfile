@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2.11'
+gem 'gmoney_client', github: 'metaskills/gmoney_client'
+gem 'dotenv', github: 'ecbypi/dotenv', branch: 'overload-environment-variables'
 gem 'sqlite3'
 
 group :assets do

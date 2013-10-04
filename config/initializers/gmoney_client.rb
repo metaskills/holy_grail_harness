@@ -1,0 +1,1 @@
+puts ">> GmoneyClient.url # => #{GmoneyClient.url}"

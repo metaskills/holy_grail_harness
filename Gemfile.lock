@@ -1,3 +1,16 @@
+GIT
+  remote: git://github.com/ecbypi/dotenv.git
+  revision: 4cafc36c0c36a0eb243a37d2e18d26be3dab3d43
+  branch: overload-environment-variables
+  specs:
+    dotenv (0.9.0)
+
+GIT
+  remote: git://github.com/metaskills/gmoney_client.git
+  revision: 83c42cd30a88ee0612a111f36c5feba9811e4823
+  specs:
+    gmoney_client (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -221,9 +234,11 @@ DEPENDENCIES
   coffee-rails
   compass-rails
   database_cleaner
+  dotenv!
   factory_girl
   font-awesome-rails
   forgery
+  gmoney_client!
   guard-konacha
   guard-minitest
   jquery-rails

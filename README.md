@@ -96,7 +96,7 @@ end
 
 ### Konacha JavaScript Tests Using PhantomJS
 
-Move over Jasmine(rice), [Konacha](https://github.com/jfirebaugh/konacha) is the way to test your JavaScript now. Konacha is a Rails engine that allows you to test your JavaScript with the [Mocha](http://visionmedia.github.com/mocha/) test framework and [Chai](http://chaijs.com) assertion library. Konacha's killer feature is a sandboxed `<iframe>` for each test spec to run within as well as full Rails asset pipeline integration. The HolyGrailHarness does all the work to get your Konacha [`spec/javascripts`](https://github.com/metaskills/holy_grail_harness/tree/master/spec/javascripts) directory all setup and ready to go. Highlights include:
+Move over Jasmine(rice), [Konacha](https://github.com/jfirebaugh/konacha) is the way to test your JavaScript now. Konacha is a Rails engine that allows you to test your JavaScript with the [Mocha](http://mochajs.org/) test framework and [Chai](http://chaijs.com) assertion library. Konacha's killer feature is a sandboxed `<iframe>` for each test spec to run within as well as full Rails asset pipeline integration. The HolyGrailHarness does all the work to get your Konacha [`spec/javascripts`](https://github.com/metaskills/holy_grail_harness/tree/master/spec/javascripts) directory all setup and ready to go. Highlights include:
 
   * An [initializer](https://github.com/metaskills/holy_grail_harness/blob/master/config/initializers/konacha.rb) that sets up Poltergeist as the Capybara driver.
   * A directory structure for model, view, and controller specs.
